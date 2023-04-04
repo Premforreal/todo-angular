@@ -1,0 +1,28 @@
+<div>
+    <h2>To-Do List</h2>
+    <form (submit)="addItem()">
+      <label for="newItemTitle">Title:</label>
+      <input type="text" id="newItemTitle" [(ngModel)]="newItemTitle" name="newItemTitle"/>
+      <label for="newItemText">Text:</label>
+      <input type="text" id="newItemText" [(ngModel)]="newItemText" name="newItemText"/>
+      <button type="submit">Add</button>
+    </form>
+    <ul>
+      <li *ngFor="let item of items">
+          <div *ngIf="!isEditing;else other_content">
+            <label for="itemTitle">Title:</label>
+            <input type="text" id="itemTitle" [(ngModel)]="item.title" name="itemTitle"/>
+            <label for="itemText">Text:</label>
+            <input type="text" id="itemText" [(ngModel)]="item.text" name="itemText"/>
+            <button type="submit">Update</button>
+          </div>
+          <ng-template #other_content>
+            <h4> {{item.title}}</h4>
+            <p>{{item.text}}</p>
+            <input type="checkbox" name="" id="" (click)="markItem(item.id)" [checked]="item.status">
+            <button (click)="removeItem(item.id)">❌</button>
+            <button (click)="editItem(item.id)">✏️</button>
+          </ng-template>
+      </li>
+    </ul>
+</div>
